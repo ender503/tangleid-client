@@ -1,0 +1,3 @@
+rootProject.name = 'TangleidClient'
+
+include ':app'
