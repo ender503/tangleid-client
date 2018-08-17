@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import configureStore from './src/utils/configureStore';
-const { store } = configureStore();
-
-
+const { persistor, store } = configureStore();
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          <Text>TangleID Rocks!</Text>
-        </View>
+        <PersistGate loading={null} persistor={persistor}>
+          <View style={styles.container}>
+            <Text>TangleID Rocks!</Text>
+          </View>
+        </PersistGate>
       </Provider>
     );
   }
