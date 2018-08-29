@@ -12,7 +12,9 @@ export default class WelcomeScreen extends Component {
     this.onNextClick = this.onNextClick.bind(this);
   }
 
-  onNextClick() {}
+  onNextClick() {
+    this.props.navigation.navigate('CreateIdentity')
+  }
 
   render() {
     return (
