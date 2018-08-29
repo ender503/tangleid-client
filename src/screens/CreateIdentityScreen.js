@@ -26,6 +26,8 @@ class CreateIdentityScreen extends React.Component {
     this.props.createIdentity({
       userName: this.state.userName
     });
+
+    this.props.navigation.navigate('Home');
   }
 
   render() {

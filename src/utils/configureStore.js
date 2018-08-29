@@ -3,12 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import logger from 'redux-logger'
 
-const rootReducer = function (state = {}, action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+import reducers from '../reducers'
 
 const persistConfig = {
   key: 'root',
@@ -17,7 +12,7 @@ const persistConfig = {
 
 const initialState = {}
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, reducers)
 
 export default () => {
   let store = createStore(persistedReducer, initialState, applyMiddleware(logger))
