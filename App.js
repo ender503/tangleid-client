@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import configureStore from './src/utils/configureStore';
 const { persistor, store } = configureStore();
 
-import { RootNavigator } from './src/AppNavigator';
+import { RootNavigator } from './src/navigators/RootNavigator';
 
 export default class App extends Component {
   render() {
