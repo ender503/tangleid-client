@@ -51,7 +51,9 @@ class HomeScreen extends React.Component {
                 )}
               />
             :
-              <Text>This is no available claims.</Text>
+              <View style={{ flex: 1, alignItems: "center", justifyContent: 'center' }}>
+                <Text>This is no available claims.</Text>
+              </View>
         }
         </View>
 

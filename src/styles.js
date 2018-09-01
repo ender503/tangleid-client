@@ -4,10 +4,8 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 35,
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginBottom: 64,
-    alignItems: 'stretch',
+    paddingVertical: 24,
+    paddingHorizontal: 16,
   },
   h1: {
     marginBottom: 15,
@@ -29,7 +27,6 @@ export default StyleSheet.create({
   },
   button: {
     height: 44,
-    marginBottom: 15,
     backgroundColor: '#113285',
     borderRadius: 5,
     alignItems: 'center',

@@ -9,7 +9,8 @@ const routers = {
 }
 
 const config = {
-  initialRouteName: 'Welcome'
+  initialRouteName: 'Welcome',
+  headerMode: 'none',
 }
 
 const AuthNavigator = createStackNavigator(routers, config);
