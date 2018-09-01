@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList, Text } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 
 import RootContainer from '../components/RootContainer';
 import HeaderBar from '../components/HeaderBar';
 import CardItem from '../components/CardItem';
 
+import FloatingButton from '../components/FloatingButton';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -20,15 +21,21 @@ class HomeScreen extends React.Component {
     this.state = { claims };
 
     this.onItemPressed = this.onItemPressed.bind(this);
+    this.onCameraClicked = this.onCameraClicked.bind(this);
   }
 
   onItemPressed(item) {}
+
+  onCameraClicked() {
+    this.props.navigation.navigate('Camera');
+  }
 
   render() {
     return (
       <RootContainer>
         <HeaderBar text={ this.props.user.userName } />
 
+        <View style={{ flex: 1}} >
         {
           this.state.claims.length > 0
             ?
@@ -46,6 +53,12 @@ class HomeScreen extends React.Component {
             :
               <Text>This is no available claims.</Text>
         }
+        </View>
+
+        <FloatingButton
+          text="Scan QR Code"
+          onPress={this.onCameraClicked}
+          />
       </RootContainer>
     );
   }
