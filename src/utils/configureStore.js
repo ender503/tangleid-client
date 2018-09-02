@@ -6,6 +6,7 @@ import logger from 'redux-logger'
 import reducers from '../reducers'
 
 const persistConfig = {
+  timeout: 10000,
   key: 'root',
   storage,
 }
