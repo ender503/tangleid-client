@@ -1,6 +1,6 @@
 import forge from 'node-forge';
 
-const API_ENDPOINT = 'http://192.168.1.104:4200';
+const API_ENDPOINT = 'http://54.70.229.53:4600';
 
 const registerIdentity = async () => {
   forge.options.usePureJavaScript = true;
@@ -17,9 +17,20 @@ const registerIdentity = async () => {
   return {
     did: identity.did,
     seed: identity.seed,
-    keypairPem
+    keypair: keypairPem,
   };
 }
+
+const sendResponse = params => {
+  const credentials = {
+    name: params.user.userName,
+    did: params.user.did,
+    pushToken: params.pushToken,
+    publicKeyPem: params.user.keypair.publicKey,
+  };
+
+  return postData(params.callback, credentials);
+};
 
 const postData = async (url, data) => {
   return fetch(url, {
@@ -39,5 +50,6 @@ const postData = async (url, data) => {
 }
 
 export default {
-  registerIdentity
+  registerIdentity,
+  sendResponse,
 };

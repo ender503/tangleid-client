@@ -40,9 +40,12 @@ class CameraScreen extends React.Component {
   }
 
   onScan(event) {
-    // TODO event.data 
     console.log('onBarCodeRead', event);
-    this.props.navigation.navigate('Home', { data: event.data });
+    this.props.navigation.navigate('Challenge', {
+      challenge: {
+        callback: event.data,
+      }
+    });
   }
 
   onCancel() {
