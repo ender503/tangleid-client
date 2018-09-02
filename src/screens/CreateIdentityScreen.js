@@ -11,21 +11,28 @@ import styles from '../styles';
 
 import { createIdentity } from '../actions';
 
+import tangleIDUtils from '../utils/tangleIDUtils';
+
 class CreateIdentityScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userName: null,
+      userName: '',
     };
 
     this.onNextClick = this.onNextClick.bind(this);
   }
 
-  onNextClick() {
-    this.props.createIdentity({
-      userName: this.state.userName
-    });
+  async onNextClick() {
+    if (this.state.userName.trim().length == 0) {
+      alert('Name cannot be empty');
+      return;
+    }
+
+    const identity = await tangleIDUtils.registerIdentity();
+    identity.userName = this.state.userName;
+    this.props.createIdentity(identity);
 
     this.props.navigation.navigate('Home');
   }
@@ -34,7 +41,7 @@ class CreateIdentityScreen extends React.Component {
     return (
       <RootContainer>
         <HeaderBar text='Enter your Information' />
-        
+
         <View style={{ flex: 1}}>
 
           <Text style={ styles.p }>
