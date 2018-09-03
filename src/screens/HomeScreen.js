@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import RootContainer from '../components/RootContainer';
 import HeaderBar from '../components/HeaderBar';
@@ -12,16 +12,15 @@ class HomeScreen extends React.Component {
     super(props);
 
     const claims = [];
-    for(var i = 0; i < 100; i++) {
-      claims.push({
-        id: i,
-        title: 'Smart card' + i
-      });
-    }
     this.state = { claims };
 
+    this.onProfileClicked = this.onProfileClicked.bind(this);
     this.onItemPressed = this.onItemPressed.bind(this);
     this.onCameraClicked = this.onCameraClicked.bind(this);
+  }
+
+  onProfileClicked() {
+    this.props.navigation.navigate('Profile');
   }
 
   onItemPressed(item) {}
@@ -33,7 +32,10 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <RootContainer>
-        <HeaderBar text={ this.props.user.userName } />
+        <TouchableOpacity
+          onPress={this.onProfileClicked}>
+          <HeaderBar text={ this.props.user.userName } />
+        </TouchableOpacity>
 
         <View style={{ flex: 1}} >
         {

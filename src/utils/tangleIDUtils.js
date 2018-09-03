@@ -32,6 +32,10 @@ const sendResponse = params => {
   return postData(params.callback, credentials);
 };
 
+const getLinkFromDID = (did) => {
+  return `${API_ENDPOINT}/did/${did}`;
+};
+
 const postData = async (url, data) => {
   return fetch(url, {
     body: JSON.stringify(data),
@@ -52,4 +56,5 @@ const postData = async (url, data) => {
 export default {
   registerIdentity,
   sendResponse,
+  getLinkFromDID,
 };
