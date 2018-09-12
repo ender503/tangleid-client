@@ -8,6 +8,7 @@ const { persistor, store } = configureStore();
 
 import { RootNavigator } from './src/navigators/RootNavigator';
 import PushService from './src/services/PushService';
+import NavigationService from './src/services/NavigationService';
 import { updatePushToken } from './src/actions';
 
 export default class App extends Component {
@@ -17,6 +18,7 @@ export default class App extends Component {
     this.onReceived = this.onReceived.bind(this);
     this.onOpened = this.onOpened.bind(this);
     this.onIds = this.onIds.bind(this);
+    this.navigateToScreen = this.navigateToScreen.bind(this);
   }
 
   componentWillMount() {
@@ -30,25 +32,33 @@ export default class App extends Component {
   }
 
   onReceived(notification) {
-    console.log("Notification received: ", notification);
+    if (notification.isAppInFocus) {
+      this.navigateToScreen(notification);
+    }
   }
 
   onOpened(openResult) {
-    console.log('Message: ', openResult.notification.payload.body);
-    console.log('Data: ', openResult.notification.payload.additionalData);
-    console.log('isActive: ', openResult.notification.isAppInFocus);
-    console.log('openResult: ', openResult);
+    this.navigateToScreen(openResult.notification);
   }
 
   onIds(device) {
     store.dispatch(updatePushToken(device.userId));
   }
 
+  navigateToScreen(notification) {
+    const additionalData = notification.payload.additionalData;
+    NavigationService.navigate('Confirmation', additionalData);
+  }
+
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <RootNavigator style={{ flex: 1 }}/>
+          <RootNavigator
+            style={{ flex: 1 }}
+            ref={navigator => {
+              NavigationService.setNavigator(navigator);
+            }}/>
         </PersistGate>
       </Provider>
     );

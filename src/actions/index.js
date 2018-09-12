@@ -3,6 +3,11 @@ export const createIdentity = userProfile => ({
   userProfile
 });
 
+export const addClaim = claim => ({
+  type: 'ADD_CLAIM',
+  claim
+});
+
 export const updatePushToken = pushToken => ({
   type: 'UPDATE_PUSH_TOKEN',
   pushToken
