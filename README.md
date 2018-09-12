@@ -33,7 +33,7 @@ $ react-native run-ios
 
 ### Run with development environment
 
-- Create new file named `.env.development` and specify API_ENDPOINT
+- Create new file named `.env.development` and specify `API_ENDPOINT` and `ONESIGNAL_APP_ID`
 
 - Run TangleID Client
 

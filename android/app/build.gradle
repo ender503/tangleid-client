@@ -1,5 +1,16 @@
+
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.10.0, 0.99.99]'
+    }
+}
+
 apply plugin: "com.android.application"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 import com.android.build.OutputFile
 
@@ -139,6 +150,7 @@ android {
 
 dependencies {
     compile project(':react-native-config')
+    compile project(':react-native-onesignal')
     compile project(':react-native-camera')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
