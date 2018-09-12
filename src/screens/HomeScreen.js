@@ -11,9 +11,6 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    const claims = [];
-    this.state = { claims };
-
     this.onProfileClicked = this.onProfileClicked.bind(this);
     this.onItemPressed = this.onItemPressed.bind(this);
     this.onCameraClicked = this.onCameraClicked.bind(this);
@@ -23,7 +20,9 @@ class HomeScreen extends React.Component {
     this.props.navigation.navigate('Profile');
   }
 
-  onItemPressed(item) {}
+  onItemPressed(item) {
+    this.props.navigation.navigate('ClaimDetail', item);
+  }
 
   onCameraClicked() {
     this.props.navigation.navigate('Camera');
@@ -39,15 +38,16 @@ class HomeScreen extends React.Component {
 
         <View style={{ flex: 1}} >
         {
-          this.state.claims.length > 0
+          this.props.claims.length > 0
             ?
               <FlatList
                 style={{ flex: 1 }}
-                data={this.state.claims}
-                renderItem={({item}) => (
+                data={this.props.claims}
+                renderItem={({item, index}) => (
                   <CardItem
-                    title={item.title}
-                    description="Card Description"
+                    key={index.toString()}
+                    title={item.claim.certification.name}
+                    description={item.claim.certification.issuerName}
                     onPress={() => { this.onItemPressed(item); }}
                   />
                 )}
@@ -70,7 +70,8 @@ class HomeScreen extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.user
+    user: state.user,
+    claims: state.claims,
   }
 }
 
