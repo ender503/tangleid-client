@@ -8,6 +8,7 @@ const { persistor, store } = configureStore();
 
 import { RootNavigator } from './src/navigators/RootNavigator';
 import PushService from './src/services/PushService';
+import { updatePushToken } from './src/actions';
 
 export default class App extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ export default class App extends Component {
   }
 
   onIds(device) {
-    console.log('Device info: ', device);
+    store.dispatch(updatePushToken(device.userId));
   }
 
   render() {

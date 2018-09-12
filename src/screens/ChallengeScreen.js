@@ -31,7 +31,7 @@ class ChallengeScreen extends React.Component {
     const callback = this.state.challenge.callback;
     tangleIDUtils.sendResponse({
       user: this.props.user,
-      pushToken: "",
+      pushToken: this.props.pushToken,
       callback,
     }).then(() => {
       this.props.navigation.popToTop();
@@ -113,7 +113,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    pushToken: state.system.pushToken
   }
 }
 
