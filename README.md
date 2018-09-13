@@ -30,3 +30,21 @@ Run on the iOS Simulator
 ```shell
 $ react-native run-ios
 ```
+
+### Run with development environment
+
+- Create new file named `.env.development` and specify API_ENDPOINT
+
+- Run TangleID Client
+
+```shell
+# Android
+$ ENVFILE=.env.development react-native run-android           # bash
+$ SET ENVFILE='.env.development' && react-native run-android  # windows
+$ env:ENVFILE=".env.development"; react-native run-android    # powershell
+
+# iOS
+$ ENVFILE=.env.development react-native run-ios           # bash
+$ SET ENVFILE='.env.development' && react-native run-ios  # windows
+$ env:ENVFILE=".env.development"; react-native run-ios    # powershell
+```

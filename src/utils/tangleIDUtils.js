@@ -1,6 +1,7 @@
 import forge from 'node-forge';
+import Config from 'react-native-config';
 
-const API_ENDPOINT = 'http://54.70.229.53:4600';
+const API_ENDPOINT = Config.API_ENDPOINT;
 
 const registerIdentity = async () => {
   forge.options.usePureJavaScript = true;
