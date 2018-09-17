@@ -19,22 +19,39 @@ class CreateIdentityScreen extends React.Component {
 
     this.state = {
       userName: '',
+      inProgress: false,
     };
 
+    this.setInProgress = this.setInProgress.bind(this);
     this.onNextClick = this.onNextClick.bind(this);
   }
 
+  setInProgress(progress) {
+    this.setState({ inProgress: progress })
+  }
+
   async onNextClick() {
+    if (this.state.inProgress) {
+      return;
+    }
+
     if (this.state.userName.trim().length == 0) {
       alert('Name cannot be empty');
       return;
     }
 
-    const identity = await tangleIDUtils.registerIdentity();
-    identity.userName = this.state.userName;
-    this.props.createIdentity(identity);
+    this.setInProgress(true);
+    try {
+      const identity = await tangleIDUtils.registerIdentity();
+      identity.userName = this.state.userName;
+      this.props.createIdentity(identity);
 
-    this.props.navigation.navigate('Home');
+      this.props.navigation.navigate('Home');
+
+    } catch(error) {
+      alert(error.name + ': ' + error.message)
+    }
+    this.setInProgress(false);
   }
 
   render() {
@@ -50,6 +67,7 @@ class CreateIdentityScreen extends React.Component {
 
           <Text>Name</Text>
           <TextInput
+            editable={!this.state.inProgress}
             style={styles.textInput}
             onChangeText={(userName) => this.setState({userName})}
             placeholder="Enter your name"
@@ -59,6 +77,7 @@ class CreateIdentityScreen extends React.Component {
 
         <TouchableButton
           text="Next"
+          inProgress={this.state.inProgress}
           onClick={this.onNextClick}
           />
 
